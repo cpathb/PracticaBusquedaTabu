@@ -1,6 +1,6 @@
-# Práctica de búsqueda local
+# Práctica de búsqueda Tabú
 ## Descripción
-Práctica 2 del módulo 2 de la asignatura Ingeniería del Conocimiento donde se aplicará el algoritmo de Busqueda Tabú al TSP (problema del viajante) para n=100 ciudades
+Práctica 2 del módulo 2 de la asignatura Ingeniería del Conocimiento donde se aplicará el algoritmo de Busqueda Tabú al TSP (problema del viajante) para **n=100** ciudades.
 
 ### Restricciones
 - La ciudad de partida y llegada tiene que ser la misma, en nuestro caso, la ciudad es 0.
