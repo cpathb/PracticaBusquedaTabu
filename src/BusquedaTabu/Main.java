@@ -9,6 +9,7 @@ public class Main {
     public static int distanciaSolucion=0;
     public static int distanciaSolucionOptima=0;
     public static int noMejora=0;
+    public static int reinicio=1;
     public static int iteracionMejorSolucion=1;
     public static List<Integer> solucion    = new ArrayList<Integer>();
     public static List<Integer> solucionOptima    = new ArrayList<Integer>();
@@ -26,12 +27,18 @@ public class Main {
             Operations.sobreescribirContenidoLista(solucion,solucionOptima);
             distanciaSolucion=Operations.calculoDistancia(solucion);
             distanciaSolucionOptima=distanciaSolucion;
-            System.out.print("Solucion Inicial -> [");
+            System.out.println("RECORRIDO INICIAL");
+            System.out.print("\tRECORRIDO: ");
             Operations.printSolution(solucion);
-            System.out.println("]; "+ distanciaSolucion +"km");
-            while(i<=1000){
+            System.out.println("\tCOSTE (km): "+ distanciaSolucion);
+            while(i<=10000){
+                System.out.println("\nITERACION: "+i);
                 Operations.generarVecinos(i);
                 if(noMejora==100){
+                    System.out.println("***************");
+                    System.out.println("REINICIO: "+reinicio);
+                    System.out.println("***************");
+                    reinicio++;
                     noMejora=0;
                     Operations.reinicializarListaTabu();
                     Operations.sobreescribirContenidoLista(solucionOptima,solucion);
@@ -39,9 +46,12 @@ public class Main {
                 }
                 i++;
             }
+
+            System.out.println("\nMEJOR SOLUCION: ");
+            System.out.print("\tRECORRIDO: ");
             Operations.printSolution(solucionOptima);
-            System.out.println("\n\tDistancia: "+Operations.calculoDistancia(solucionOptima)+"km");
-            System.out.println("\tNúmero Iteración: "+iteracionMejorSolucion);
+            System.out.println("\tCOSTE (km): "+ distanciaSolucionOptima);
+            System.out.println("\tITERACION: "+ iteracionMejorSolucion);
         }
         else{
             if(args.length == 1){ // Se introdujo solo el archivo de distancias como argumento
@@ -50,12 +60,18 @@ public class Main {
                 Operations.sobreescribirContenidoLista(solucion,solucionOptima);
                 distanciaSolucion=Operations.calculoDistancia(solucion);
                 distanciaSolucionOptima=distanciaSolucion;
-                System.out.print("Solucion Inicial -> [");
+                System.out.println("RECORRIDO INICIAL");
+                System.out.print("\tRECORRIDO: ");
                 Operations.printSolution(solucion);
-                System.out.println("]; "+ distanciaSolucion +"km");
-                while(i<=1000){
+                System.out.println("\tCOSTE (km): "+ distanciaSolucion);
+                while(i<=10000){
+                    System.out.println("\nITERACION: "+i);
                     Operations.generarVecinos(i);
                     if(noMejora==100){
+                        System.out.println("***************");
+                        System.out.println("REINICIO: "+reinicio);
+                        System.out.println("***************");
+                        reinicio++;
                         noMejora=0;
                         Operations.reinicializarListaTabu();
                         Operations.sobreescribirContenidoLista(solucionOptima,solucion);
@@ -63,9 +79,12 @@ public class Main {
                     }
                     i++;
                 }
+
+                System.out.println("\nMEJOR SOLUCION: ");
+                System.out.print("\tRECORRIDO: ");
                 Operations.printSolution(solucionOptima);
-                System.out.println("\n\tDistancia: "+Operations.calculoDistancia(solucionOptima)+"km");
-                System.out.println("\tNúmero Iteración: "+iteracionMejorSolucion);
+                System.out.println("\tCOSTE (km): "+ distanciaSolucionOptima);
+                System.out.println("\tITERACION: "+ iteracionMejorSolucion);
             }
             else{ // Se introdujo el archivo de distancias y el de aleatorios como argumento
                 Operations.distancias(args[0]);
@@ -73,12 +92,18 @@ public class Main {
                 Operations.sobreescribirContenidoLista(solucion,solucionOptima);
                 distanciaSolucion=Operations.calculoDistancia(solucion);
                 distanciaSolucionOptima=distanciaSolucion;
-                System.out.print("Solucion Inicial -> [");
+                System.out.println("RECORRIDO INICIAL");
+                System.out.print("\tRECORRIDO: ");
                 Operations.printSolution(solucion);
-                System.out.println("]; "+ distanciaSolucion +"km");
-                while(i<=1000){
+                System.out.println("\tCOSTE (km): "+ distanciaSolucion);
+                while(i<=10000){
+                    System.out.println("\nITERACION: "+i);
                     Operations.generarVecinos(i);
                     if(noMejora==100){
+                        System.out.println("\n***************");
+                        System.out.println("REINICIO: "+reinicio);
+                        System.out.println("***************");
+                        reinicio++;
                         noMejora=0;
                         Operations.reinicializarListaTabu();
                         Operations.sobreescribirContenidoLista(solucionOptima,solucion);
@@ -86,9 +111,12 @@ public class Main {
                     }
                     i++;
                 }
+
+                System.out.println("\nMEJOR SOLUCION: ");
+                System.out.print("\tRECORRIDO: ");
                 Operations.printSolution(solucionOptima);
-                System.out.println("\n\tDistancia: "+Operations.calculoDistancia(solucionOptima)+"km");
-                System.out.println("\tNúmero Iteración: "+iteracionMejorSolucion);
+                System.out.println("\tCOSTE (km): "+ distanciaSolucionOptima);
+                System.out.println("\tITERACION: "+ iteracionMejorSolucion);
             }
         }
     }

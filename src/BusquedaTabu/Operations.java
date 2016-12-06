@@ -157,14 +157,15 @@ public class Operations{
             while(j<Main.ciudades-1){
                 while(k<j){
                     reiniciarVecino(intercambio);
-                    intercambio.add(i);
                     intercambio.add(j);
+                    intercambio.add(k);
                     if(!Main.listaTabu.contains(intercambio)) {
                         if (mejorVecino.isEmpty()) {
+                            reiniciarVecino(intercambioMejor);
                             intercambiarIndices(Main.solucion, mejorVecino, j, k);
                             distanciaMejorVecino = calculoDistancia(mejorVecino);
-                            intercambioMejor.add(i);
                             intercambioMejor.add(j);
+                            intercambioMejor.add(k);
                         }
                         else {
                             reiniciarVecino(vecino);
@@ -174,8 +175,8 @@ public class Operations{
                                 sobreescribirContenidoLista(vecino, mejorVecino);
                                 distanciaMejorVecino = distanciaVecino;
                                 reiniciarVecino(intercambioMejor);
-                                intercambioMejor.add(i);
                                 intercambioMejor.add(j);
+                                intercambioMejor.add(k);
                             }
                         }
                     }
@@ -198,7 +199,18 @@ public class Operations{
         else{
             Main.noMejora++;
         }
+
+        System.out.println("\tINTERCAMBIO: ("+intercambioMejor.get(0)+", "+intercambioMejor.get(1)+")");
+        System.out.print("\tRECORRIDO: ");
+        Operations.printSolution(Main.solucion);
+        System.out.println("\tCOSTE (km): "+ Main.distanciaSolucion);
+        System.out.println("\tITERACIONES SIN MEJORA: "+ Main.noMejora);
+        System.out.println("\tLISTA TABU:");
+        printTabu(Main.listaTabu);
+
+
     }
+
     /*
         Función para calcular el coste (Distancia total) de una solución
     */
@@ -221,10 +233,22 @@ public class Operations{
     public static void printSolution(List<Integer> Lista){
         int i=0;
         while(i<Lista.size()-1){
-            System.out.print(Lista.get(i)+", ");
+            System.out.print(Lista.get(i)+" ");
             i++;
         }
-        System.out.print(Lista.get(i));
+        System.out.println(Lista.get(i)+" ");
+    }
+
+    /*
+        Función para imprimir la lista tabu
+    */
+    public static void printTabu(List<List<Integer>> Lista){
+        int i=0;
+        List <Integer> Elemento;
+        while(i<Lista.size()){
+            System.out.println("\t"+Lista.get(i).get(0)+" "+Lista.get(i).get(1));
+            i++;
+        }
     }
 
     /*
