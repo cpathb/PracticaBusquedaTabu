@@ -163,15 +163,15 @@ public class Operations{
                         if (mejorVecino.isEmpty()) {
                             reiniciarVecino(intercambioMejor);
                             intercambiarIndices(Main.solucion, mejorVecino, j, k);
-                            distanciaMejorVecino = calculoDistancia(mejorVecino);
+                            distanciaMejorVecino = calculoDistanciaIntercambio(Main.solucion,Main.distanciaSolucion,j,k);
                             intercambioMejor.add(j);
                             intercambioMejor.add(k);
                         }
                         else {
                             reiniciarVecino(vecino);
-                            intercambiarIndices(Main.solucion, vecino, j, k);
-                            distanciaVecino = calculoDistancia(vecino);
+                            distanciaVecino = calculoDistanciaIntercambio(Main.solucion,Main.distanciaSolucion,j,k);
                             if (distanciaVecino < distanciaMejorVecino) {
+                                intercambiarIndices(Main.solucion, vecino, j, k);
                                 sobreescribirContenidoLista(vecino, mejorVecino);
                                 distanciaMejorVecino = distanciaVecino;
                                 reiniciarVecino(intercambioMejor);
@@ -182,6 +182,7 @@ public class Operations{
                     }
                     i++;
                     k++;
+
                 }
                 k=0;
                 j++;
@@ -212,7 +213,7 @@ public class Operations{
     }
 
     /*
-        Función para calcular el coste (Distancia total) de una solución
+        Función para calcular el coste (Distancia total) de una solución (Emplea todos los elementos de la solución)
     */
     public static Integer calculoDistancia(List<Integer> Lista){
         Integer distancia=0;
@@ -224,6 +225,78 @@ public class Operations{
             distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(i),Lista.get(i+1)));
             i++;
         }
+        return distancia;
+    }
+
+    /*
+        Función para calcular el coste (Distancia total) de una solución obtenida por un intercambio basandose en una solución previamente calculada
+    */
+    public static Integer calculoDistanciaIntercambio(List<Integer> Lista, int distancia, int pos1, int pos2){
+        if(pos2==0){
+            if(pos1==Main.ciudades-2){
+                distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1-1)));
+                distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1-1)));
+                distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2+1)));
+                distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2+1)));
+            }
+            else{
+                if(pos1==(pos2+1)){
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),0));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),0));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1+1)));
+                }
+                else{
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),0));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),0));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2+1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1-1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1+1)));
+                }
+            }
+        }
+        else{
+            if(pos1==Main.ciudades-2){
+                if(pos1==(pos2+1)){
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),0));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),0));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2-1)));
+                }
+                else{
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1-1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),0));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),0));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2-1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2+1)));
+                }
+            }
+            else{
+                if(pos1==(pos2+1)){
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1+1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2-1)));
+                }
+                else{
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1-1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos1+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos1+1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2-1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2-1)));
+                    distancia=distancia-Main.distancias.get(conversorTuplaPosicion(Lista.get(pos2),Lista.get(pos2+1)));
+                    distancia=distancia+Main.distancias.get(conversorTuplaPosicion(Lista.get(pos1),Lista.get(pos2+1)));
+                }
+            }
+        }
+
         return distancia;
     }
 

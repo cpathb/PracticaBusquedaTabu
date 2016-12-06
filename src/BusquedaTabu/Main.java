@@ -112,7 +112,7 @@ public class Main {
                     i++;
                 }
 
-                System.out.println("\nMEJOR SOLUCION: ");
+                System.out.println("\n\nMEJOR SOLUCION: ");
                 System.out.print("\tRECORRIDO: ");
                 Operations.printSolution(solucionOptima);
                 System.out.println("\tCOSTE (km): "+ distanciaSolucionOptima);
