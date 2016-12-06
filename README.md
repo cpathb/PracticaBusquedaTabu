@@ -28,7 +28,7 @@ Para calcular el coste total del problema se empleará la siguiente función:
 El criterio de aceptación será el **mejor** de todos los vecinos, siempre que no sea generado con un movimiento incluído en la lista tabú.
 
 ### Criterio de parada
-Se finalizará la búsqueda cuando se realicen 1000 iteraciones de generación de vecinos.
+Se finalizará la búsqueda cuando se realicen 10000 iteraciones de generación de vecinos.
 
 ## Compilación, generación de ejecutable y ejecución
 El proyecto ha sido desarrollado empleando el IDE [IntelliJ IDEA 2016.2.5](https://www.jetbrains.com/idea/), por lo que la compilación, ejecución y la generación del .jar se ha realizado empleando este IDE, aunque se ha probado a ejecutar el .jar en una terminal para comprobar el funcionamiento del .jar generado.
